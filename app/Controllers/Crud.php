@@ -27,21 +27,64 @@ class Crud extends BaseController
     public function create()
     {
         $data = [
-            'title' => _TITLE
+            'title' => _TITLE,
+            'validation' => \Config\Services::validation()
         ];
        return view('crud/create', $data);
 
     }
 
-    //FUNGSI SAVE
+
+    //FUNGSI SAVE NOTIF
     public function save()
     {
+        if ($this->validate([
+            'no_pegawai' => 'required',
+            'nama' => 'required',
+            'departemen' => 'required',
+        ])) {
+            return redirect()->to('/crud-create')->withInput();
+        }
         $this->crud_model->save([
-            'no_pegawai'=> $this->request->getVar('no_pegawai'),
-            'nama'=> $this->request->getVar('nama'),
-            'departemen'=> $this->request->getVar('departemen')
+            'no_pegawai' => $this->request->getVar('no_pegawai'),
+            'nama' => $this->request->getVar('nama'),
+            'departemen' => $this->request->getVar('departemen')
         ]);
-        session()->setFlashdata('success','Data Berhasil Ditambahkan');
-        return redirect()->to('crud');
+        session()->setFlashdata('succes','Data Berhasil Di Tambahkan');
+        return redirect()->to('/crud');
+    }
+
+    //FUNGSI EDIT
+    public function edit($id)
+    {
+        $data_crud = $this->crud_model->where(['id_tbl_pegawai' => $id])->first();
+
+        $data = [
+            'title' => _TITLE,
+            'result' => $data_crud
+        ];
+        return view('crud/edit',$data);
+    }
+
+    
+
+    public function update($id)
+    {
+        $this->crud_model->save([
+            'id_tbl_pegawai' => $id,
+            'no_pegawai' => $this->request->getVar('no_pegawai'),
+            'nama' => $this->request->getVar('nama'),
+            'departemen' => $this->request->getVar('departemen')
+        ]);
+        session()->setFlashdata('succes','Data Berhasil Diubah');
+        return redirect()->to('/crud');
+    }
+
+    public function delete($id)
+    {
+        $this->crud_model->delete($id);
+
+        session()->setFlashdata('success','Data Berhasil Dihapus');
+        return redirect()->to('/crud');
     }
 }

@@ -5,11 +5,14 @@
         <div class="card-body">
         
             <hr>
-            <form action="/crud-create" method="POST">
+            <form action="/create-crud" method="POST">
                 <?= csrf_field() ?>
             <div class="mb-3">
                 <label class="form-label">No Pegawai</label>
-                <input type="text" class="form-control" name="no_pegawai">
+                <input type="text" class="form-control <?= $validation->hasError('nama') ? 'is-invalid' : '' ?>  " name="no_pegawai">
+                <div class="invalid-feedback">
+                    <?= $validation->getError('_no_pegawai') ?>
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label">nama</label>

@@ -33,8 +33,12 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->get('/crud', 'Crud::index');
-$routes->get('/crud-create', 'Crud::create');
-$routes->post('/crud-create', 'Crud::save');
+$routes->get('/create-crud', 'Crud::create');
+$routes->post('/create-crud', 'Crud::save');
+$routes->get('/crud-edit/(:num)', 'Crud::edit/$1');
+$routes->post('/crud-edit/(:num)', 'Crud::update/$1');
+$routes->get('/crud-hapus/(:num)', 'Crud::delete/$1');
+
 
 /*
  * --------------------------------------------------------------------
