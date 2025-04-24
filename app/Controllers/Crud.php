@@ -30,9 +30,10 @@ class Crud extends BaseController
             'title' => _TITLE,
             'validation' => \Config\Services::validation()
         ];
-       return view('crud/create', $data);
-
+    
+        return view('crud/create', $data);
     }
+    
 
 
     //FUNGSI SAVE NOTIF
@@ -40,9 +41,28 @@ class Crud extends BaseController
     {
         //VALIDASI 
         if (!$this->validate([
-            'no_pegawai' => 'required',
-            'nama' => 'required',
-            'departemen' => 'required',
+            'no_pegawai' => [
+                'rules' => 'required|is_unique[tbl_pegawai.no.pegawai]',
+                'label' => 'No Pegawai',
+                'error' => [
+                    'required' => '{field} harus diisi',
+                    'is_unique' => '{field} Sudah Ada',
+                ]
+            ],
+            'nama' => [
+                'rules' => 'required',
+                'label' => 'Nama',
+                'error' => [
+                    'required' => '{field} harus diisi',
+                ]
+            ],
+            'departemen' => [
+                'rules' => 'required',
+                'label' => 'Departemen',
+                'error' => [
+                    'required' => '{field} harus diisi',
+                ]
+            ],
         ])) {
             return redirect()->to('/create-crud')->withInput();
         }
