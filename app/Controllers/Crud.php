@@ -23,7 +23,7 @@ class Crud extends BaseController
 
         return view('crud/index', $data);
     }
-
+//FUNGSI CREATE
     public function create()
     {
         $data = [
@@ -42,9 +42,9 @@ class Crud extends BaseController
         //VALIDASI 
         if (!$this->validate([
             'no_pegawai' => [
-                'rules' => 'required|is_unique[tbl_pegawai.no.pegawai]',
+                'rules' => 'required|is_unique[tbl_pegawai.no_pegawai]',
                 'label' => 'No Pegawai',
-                'error' => [
+                'errors' => [
                     'required' => '{field} harus diisi',
                     'is_unique' => '{field} Sudah Ada',
                 ]
@@ -52,7 +52,7 @@ class Crud extends BaseController
             'nama' => [
                 'rules' => 'required',
                 'label' => 'Nama',
-                'error' => [
+                'errors' => [
                     'required' => '{field} harus diisi',
                 ]
             ],
@@ -66,6 +66,7 @@ class Crud extends BaseController
         ])) {
             return redirect()->to('/create-crud')->withInput();
         }
+
         $this->crud_model->save([
             'no_pegawai' => $this->request->getVar('no_pegawai'),
             'nama' => $this->request->getVar('nama'),
@@ -74,23 +75,33 @@ class Crud extends BaseController
         session()->setFlashdata('succes','Data Berhasil Di Tambahkan');
         return redirect()->to('/crud');
     }
+//END CREATE 
 
-    //FUNGSI EDIT
+//FUNGSI EDIT
     public function edit($id)
     {
         $data_crud = $this->crud_model->where(['id_tbl_pegawai' => $id])->first();
 
         $data = [
             'title' => _TITLE,
-            'result' => $data_crud
+            'result' => $data_crud,
+            'validation' => \Config\Services::validation()
         ];
         return view('crud/edit',$data);
     }
-
-    
+    //VALIDASI EDIT
 
     public function update($id)
     {
+        $no_lama = $this->request->getVar('no_lama');
+        $dataNoLama = $this->crud_model->where(['id_tbl_pegawai'=>$id])->first();
+        
+        if ($dataNoLama['no_pegawai'] == $this->request->getVar('no_pegawai')) {
+            $rule_title = 'required';
+        } else{
+            $rule_title = 'required|is_unique[tbl_pegawai.no_pegawai]';
+        }
+
         $this->crud_model->save([
             'id_tbl_pegawai' => $id,
             'no_pegawai' => $this->request->getVar('no_pegawai'),

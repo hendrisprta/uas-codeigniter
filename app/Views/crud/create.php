@@ -17,7 +17,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">nama</label>
-                <input type="text" class="form-control" <?= $validation->hasError('nama') ? 'is-invalid' : '' ?> name="nama">
+                <input type="text" class="form-control <?= $validation->hasError('nama') ? 'is-invalid' : '' ?>" name="nama">
                 <!-- VALIDASI -->
                 <div class="invalid-feedback">
                     <?= $validation->getError('nama') ?>
@@ -25,7 +25,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">departemen</label>
-                <input type="text" class="form-control" <?= $validation->hasError('departemen') ? 'is-invalid' : '' ?> name="departemen">
+                <input type="text" class="form-control <?= $validation->hasError('departemen') ? 'is-invalid' : '' ?>" name="departemen">
                 <!-- VALIDASI -->
                 <div class="invalid-feedback">
                     <?= $validation->getError('departemen') ?>
