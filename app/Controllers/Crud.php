@@ -38,12 +38,13 @@ class Crud extends BaseController
     //FUNGSI SAVE NOTIF
     public function save()
     {
-        if ($this->validate([
+        //VALIDASI 
+        if (!$this->validate([
             'no_pegawai' => 'required',
             'nama' => 'required',
             'departemen' => 'required',
         ])) {
-            return redirect()->to('/crud-create')->withInput();
+            return redirect()->to('/create-crud')->withInput();
         }
         $this->crud_model->save([
             'no_pegawai' => $this->request->getVar('no_pegawai'),
