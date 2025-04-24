@@ -25,11 +25,14 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">departemen</label>
-                <input type="text" class="form-control <?= $validation->hasError('departemen') ? 'is-invalid' : '' ?>" name="departemen">
-                <!-- VALIDASI -->
-                <div class="invalid-feedback">
-                    <?= $validation->getError('departemen') ?>
-                </div>
+                <select class="form-control" name="id_departemen">
+                    <?php foreach ($departemen as $value) : ?>
+                        <option value="<?= $value['id_departemen'] ?>">
+                            <?= old('id_departemen') == $value['id_departemen'] ? 'selected' : ''?>>
+                            <?= $value['nama_departemen']?> ===== <?= $value['nama_bagian']?>
+                        </option>
+                        <?php endforeach; ?>
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Tambah Data</button>
             </form>

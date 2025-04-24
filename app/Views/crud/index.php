@@ -19,7 +19,8 @@
                         <th scope="col">No Table</th>
                         <th scope="col">No Pegawai</th>
                         <th scope="col">Nama</th>
-                        <th scope="col">Departemen</th>
+                        <th scope="col">Nama Departemen</th>
+                        <th scope="col">Nama Bagian</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -30,7 +31,9 @@
                         <th scope="row"><?= $no++ ?></th>
                         <td><?= $value['no_pegawai'] ?></td>
                         <td><?= $value['nama'] ?></td>
-                        <td><?= $value['departemen'] ?></td>
+                        <td><?= $value['nama_departemen'] ?></td>
+                        <td><?= $value['nama_bagian'] ?></td>
+
                         <td>
                         <!--FUNGSI UBAH DAN HAPUS -->
                             <a href="/crud-edit/<?= $value['id_tbl_pegawai'] ?>"><button type="button" class="btn btn-info">Ubah</button></a>

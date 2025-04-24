@@ -57,13 +57,6 @@ class Departemen extends BaseController
                     'required' => '{field} harus diisi',
                 ]
             ],
-            'departemen' => [
-                'rules' => 'required',
-                'label' => 'Departemen',
-                'error' => [
-                    'required' => '{field} harus diisi',
-                ]
-            ],
         ])) {
             return redirect()->to('/create-departemen')->withInput();
         }

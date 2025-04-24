@@ -2,19 +2,21 @@
 
 namespace App\Controllers;
 use App\Models\CrudModel;
+use App\Models\DepartemenModel;
 
 define('_TITLE','CRUD');
 
 class Crud extends BaseController
 {
-    private $crud_model;
+    private $crud_model, $departemen_model;
     public function __construct()
     {
         $this->crud_model = new CrudModel();
+        $this->departemen_model = new DepartemenModel();
     }
     public function index()
     {
-        $data_crud = $this->crud_model->findAll();
+        $data_crud = $this->crud_model->getPegawai();
 
         $data = [
             'title' => _TITLE,
@@ -28,6 +30,8 @@ class Crud extends BaseController
     {
         $data = [
             'title' => _TITLE,
+            //Untuk memanggil dari tbl departemen
+            'departemen' => $this->departemen_model->orderby('nama_departemen')->findAll(),
             'validation' => \Config\Services::validation()
         ];
     
@@ -56,13 +60,6 @@ class Crud extends BaseController
                     'required' => '{field} harus diisi',
                 ]
             ],
-            'departemen' => [
-                'rules' => 'required',
-                'label' => 'Departemen',
-                'error' => [
-                    'required' => '{field} harus diisi',
-                ]
-            ],
         ])) {
             return redirect()->to('/create-crud')->withInput();
         }
@@ -70,7 +67,7 @@ class Crud extends BaseController
         $this->crud_model->save([
             'no_pegawai' => $this->request->getVar('no_pegawai'),
             'nama' => $this->request->getVar('nama'),
-            'departemen' => $this->request->getVar('departemen')
+            'id_departemen' => $this->request->getVar('id_departemen')
         ]);
         session()->setFlashdata('succes','Data Berhasil Di Tambahkan');
         return redirect()->to('/crud');
@@ -85,6 +82,8 @@ class Crud extends BaseController
         $data = [
             'title' => _TITLE,
             'result' => $data_crud,
+            //Untuk memanggil dari tbl departemen
+            'departemen' => $this->departemen_model->orderby('nama_departemen')->findAll(),
             'validation' => \Config\Services::validation()
         ];
         return view('crud/edit',$data);
@@ -124,13 +123,6 @@ class Crud extends BaseController
                     'required' => '{field} harus diisi',
                 ]
             ],
-            'departemen' => [
-                'rules' => 'required',
-                'label' => 'Departemen',
-                'error' => [
-                    'required' => '{field} harus diisi',
-                ]
-            ],
         ])) {
             return redirect()->to('/crud-edit/' . $no_lama)->withInput();
         }
@@ -138,7 +130,7 @@ class Crud extends BaseController
             'id_tbl_pegawai' => $id,
             'no_pegawai' => $this->request->getVar('no_pegawai'),
             'nama' => $this->request->getVar('nama'),
-            'departemen' => $this->request->getVar('departemen')
+            'id_departemen' => $this->request->getVar('id_departemen')
         ]);
         session()->setFlashdata('succes','Data Berhasil Diubah');
         return redirect()->to('/crud');
