@@ -31,6 +31,8 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+
+/* ROUTER CRUD TBL PEGAWAI*/
 $routes->get('/', 'Home::index');
 $routes->get('/crud', 'Crud::index');
 $routes->get('/create-crud', 'Crud::create');
@@ -38,6 +40,13 @@ $routes->post('/create-crud', 'Crud::save');
 $routes->get('/crud-edit/(:num)', 'Crud::edit/$1');
 $routes->post('/crud-edit/(:num)', 'Crud::update/$1');
 $routes->get('/crud-hapus/(:num)', 'Crud::delete/$1');
+/* ROUTUER CRUD TBL DEPARTEMEN */
+$routes->get('/departemen', 'Departemen::index');
+$routes->get('/create-departemen', 'Departemen::create');
+$routes->post('/create-departemen', 'Departemen::save');
+$routes->get('/departemen-edit/(:num)', 'Departemen::edit/$1');
+$routes->post('/departemen-edit/(:num)', 'Departemen::update/$1');
+$routes->get('/departemen-hapus/(:num)', 'Departemen::delete/$1');
 
 
 /*
