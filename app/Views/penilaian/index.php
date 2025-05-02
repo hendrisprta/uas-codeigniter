@@ -3,7 +3,7 @@
 
 <div class="card">
         <div class="card-body">
-            <a href="/create-crud">
+            <a href="/create-penilaian">
             <button type="button" class="btn btn-primary">Tambah Data</button>
             </a>
             <hr>
@@ -13,35 +13,28 @@
             </div>
             <?php endif; ?>
             <hr>
-            <table class="table" id="example" style="width: 100%">
+            <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">No Table</th>
                         <th scope="col">No Pegawai</th>
-                        <th scope="col">Nama</th>
-                        <th scope="col">Nama Departemen</th>
-                        <th scope="col">Nama Bagian</th>
-                        <th scope="col">Foto</th>
+                        <th scope="col">Penilaian</th>
+                        <th scope="col">Keterangan</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $no = 1; 
-                    foreach ($data_crud as $value) : ?>
+                    foreach ($data_penilaian as $value) : ?>
                     <tr>
                         <th scope="row"><?= $no++ ?></th>
                         <td><?= $value['no_pegawai'] ?></td>
-                        <td><?= $value['nama'] ?></td>
-                        <td><?= $value['nama_departemen'] ?></td>
-                        <td><?= $value['nama_bagian'] ?></td>
+                        <td><?= $value['penilaian'] ?></td>
+                        <td><?= $value['keterangan'] ?></td>
                         <td>
-                            <img src="/img/<?= $value['foto'] ?>" alt="" width="100px">
-                        </td>
-
-                        <td>
-                        <!--FUNGSI UBAH DAN HAPUS -->
-                            <a href="/crud-edit/<?= $value['id_tbl_pegawai'] ?>"><button type="button" class="btn btn-info">Ubah</button></a>
-                            <a href="/crud-hapus/<?= $value['id_tbl_pegawai'] ?>"><button type="button" class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin Menghapus Data Ini?')">Hapus</button></a>
+                        <!--FUNGSI UBAH DAN HAPUS PENILAIAN -->
+                            <a href="/penilaian-edit/<?= $value['id_tbl_penilaian'] ?>"><button type="button" class="btn btn-info">Ubah</button></a>
+                            <a href="/penilaian-hapus/<?= $value['id_tbl_penilaian'] ?>"><button type="button" class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin Menghapus Data Ini?')">Hapus</button></a>
                         </td>
                     </tr>
                     <?php endforeach ?>

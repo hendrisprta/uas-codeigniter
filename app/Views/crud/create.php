@@ -5,7 +5,7 @@
         <div class="card-body">
         
             <hr>
-            <form action="/create-crud" method="POST">
+            <form action="/create-crud" method="POST" enctype="multipart/form-data">
                 <?= csrf_field() ?>
             <div class="mb-3">
                 <label class="form-label">No Pegawai</label>
@@ -33,6 +33,21 @@
                         </option>
                         <?php endforeach; ?>
                 </select>
+            </div>
+            <!-- INPUT FOTO -->
+            <div class="mb-3">
+                <label class="form-label">Foto</label>
+                
+                <div class="col-sm-12">
+                    <input type="file" class="form-control <?= $validation->hasError('foto') ? 'is-invalid' : '' ?>  " name="foto" id="foto" value="<?=old('foto') ?>" onchange="previewImage()">
+                    <!-- VALIDASI -->
+                    <div class="invalid-feedback">
+                        <?= $validation->getError('foto') ?>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="/img/default.png" alt="" class="img-preview" width="300">
+                    </div>
+                </div>     
             </div>
             <button type="submit" class="btn btn-primary">Tambah Data</button>
             </form>

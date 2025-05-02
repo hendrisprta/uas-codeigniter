@@ -10,7 +10,7 @@ Class CrudModel extends Model
 {
     protected $table            =  'tbl_pegawai';
     protected $primaryKey       = 'id_tbl_pegawai';
-    protected $allowedFields    = ['no_pegawai','nama','id_departemen'];
+    protected $allowedFields    = ['no_pegawai','nama','id_departemen','foto'];
 
     //FUNGSI UNTUK RELASIKAN
     public function getPegawai()

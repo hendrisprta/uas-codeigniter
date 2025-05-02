@@ -49,6 +49,17 @@ $routes->post('/departemen-edit/(:num)', 'Departemen::update/$1');
 $routes->get('/departemen-hapus/(:num)', 'Departemen::delete/$1');
 
 
+/* ROUTUER CRUD TBL PENILAIAN */
+$routes->get('/', 'Home::index');
+$routes->get('/create-penilaian', 'Penilaian::create');
+$routes->post('/create-penilaian', 'Penilaian::save');
+$routes->get('/penilaian-edit/(:num)', 'Penilaian::edit/$1');
+$routes->post('/penilaian-update/(:num)', 'Penilaian::update/$1');
+$routes->get('/penilaian-hapus/(:num)', 'Penilaian::delete/$1');
+
+
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

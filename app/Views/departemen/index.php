@@ -13,7 +13,7 @@
             </div>
             <?php endif; ?>
             <hr>
-            <table class="table">
+            <table class="table" id="example" style="width: 100%">
                 <thead>
                     <tr>
                         <th scope="col">No Table</th>
@@ -29,6 +29,7 @@
                         <th scope="row"><?= $no++ ?></th>
                         <td><?= $value['nama_departemen'] ?></td>
                         <td><?= $value['nama_bagian'] ?></td>
+
                         <td>
                         <!--FUNGSI UBAH DAN HAPUS -->
                             <a href="/departemen-edit/<?= $value['id_departemen'] ?>"><button type="button" class="btn btn-info">Ubah</button></a>

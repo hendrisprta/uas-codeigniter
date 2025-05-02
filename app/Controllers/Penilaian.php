@@ -2,30 +2,28 @@
 
 namespace App\Controllers;
 use App\Models\CrudModel;
-use App\Models\DepartemenModel;
+use App\Models\PenilaianModel;
 
-define('_TITLE','CRUD');
+define('_TITLE','Penilaian');
 
-class Crud extends BaseController
+class Penilaian extends BaseController
 {
-    private $crud_model, $departemen_model;
-    private $_defaulting;
+    private $crud_model, $penilaian_model;
     public function __construct()
     {
         $this->crud_model = new CrudModel();
-        $this->departemen_model = new DepartemenModel();
-        $this->_defaulting = "default.png";
+        $this->penilaian_model = new PenilaianModel();
     }
     public function index()
     {
-        $data_crud = $this->crud_model->getPegawai();
+        $data_penilaian = $this->penilaian_model->getPenilaian();
 
         $data = [
             'title' => _TITLE,
-            'data_crud' => $data_crud
+            'data_penilaian' => $data_penilaian
         ];
 
-        return view('crud/index', $data);
+        return view('penilaian/index', $data);
     }
 //FUNGSI CREATE
     public function create()
@@ -33,11 +31,11 @@ class Crud extends BaseController
         $data = [
             'title' => _TITLE,
             //Untuk memanggil dari tbl departemen
-            'departemen' => $this->departemen_model->orderby('nama_departemen')->findAll(),
+            'penilaian' => $this->penilaian_model->orderby('id_tbl_penilaian')->findAll(),
             'validation' => \Config\Services::validation()
         ];
     
-        return view('crud/create', $data);
+        return view('penilaian/create', $data);
     }
     
 
@@ -48,66 +46,58 @@ class Crud extends BaseController
         //VALIDASI 
         if (!$this->validate([
             'no_pegawai' => [
-                'rules' => 'required|is_unique[tbl_pegawai.no_pegawai]',
+                'rules' => 'required|is_unique[tbl_penilaian.no_pegawai]',
                 'label' => 'No Pegawai',
                 'errors' => [
                     'required' => '{field} harus diisi',
                     'is_unique' => '{field} Sudah Ada',
                 ]
             ],
-            'nama' => [
+            'penilaian' => [
                 'rules' => 'required',
-                'label' => 'Nama',
+                'label' => 'Penilaian',
                 'errors' => [
                     'required' => '{field} harus diisi',
                 ]
             ],
-            'foto' => [
-                'rules' => 'max_size[foto,1024]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
-                'label' => 'Foto',
-                'errors' =>[
-                    'max-size' => '{field} Tidak boleh lebih dari 1MB',
-                    'is_image' => '{field} File Bukan Gambar',
-                    'mime_in' => '{field} File Bukan Gambar',
+            'keterangan' => [
+                'rules' => 'required',
+                'label' => 'Keterangan',
+                'errors' => [
+                    'required' => '{field} harus diisi',
                 ]
-            ]
+            ],
         ])) {
-            return redirect()->to('/create-crud')->withInput();
+            return redirect()->to('/create-penilaian')->withInput();
         }
-        //MINTAK FILE FOTO
-        $file_foto = $this->request->getFile('foto');
-        if ($file_foto->getError() === 4){
-            $nama_file = $this->_defaulting;
-        }else{
-            $nama_file = $file_foto->getRandomName();
-            $file_foto->move('img',$nama_file);
-        }
-        $this->crud_model->save([
+
+        $this->penilaian_model->save([
             'no_pegawai' => $this->request->getVar('no_pegawai'),
-            'nama' => $this->request->getVar('nama'),
-            'id_departemen' => $this->request->getVar('id_departemen'),
-            'foto' => $nama_file
+            'penilaian' => $this->request->getVar('penilaian'),
+            'keterangan' => $this->request->getVar('keterangan')
         ]);
         session()->setFlashdata('succes','Data Berhasil Di Tambahkan');
-        return redirect()->to('/crud');
+        return redirect()->to('/penilaian');
     }
 //END CREATE 
 
-//FUNGSI EDIT
+//FUNGSI EDIT 
+/*
     public function edit($id)
     {
-        $data_crud = $this->crud_model->where(['id_tbl_pegawai' => $id])->first();
+        $data_crud = $this->crud_model->where(['id_tbl_penilaian' => $id])->first();
 
         $data = [
             'title' => _TITLE,
             'result' => $data_crud,
             //Untuk memanggil dari tbl departemen
-            'departemen' => $this->departemen_model->orderby('nama_departemen')->findAll(),
+            'departemen' => $this->penilaian_model->orderby('id_tbl_penilaian')->findAll(),
             'validation' => \Config\Services::validation()
         ];
-        return view('crud/edit',$data);
+        return view('penilaian/edit',$data);
     }
 
+    /*
     //FUNGSI EDIT
     public function update($id)
     {
@@ -121,6 +111,8 @@ class Crud extends BaseController
         di tabel tbl_pegawai, dengan aturan 'required|is_unique[tbl_pegawai.no_pegawai]'
         . Bahasa mudah anggap username ig
         */
+
+        /*
         if ($dataNoLama['no_pegawai'] == $this->request->getVar('no_pegawai')) {
             $rule_title = 'required';
         } else{
@@ -162,4 +154,5 @@ class Crud extends BaseController
         session()->setFlashdata('success','Data Berhasil Dihapus');
         return redirect()->to('/crud');
     }
+    */
 }

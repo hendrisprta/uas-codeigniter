@@ -7,8 +7,10 @@
 
     <link rel="stylesheet" href="<?= base_url()?>/css/bootstrap.min.css">
 
+    <link rel="stylesheet" href="<?= base_url()?>/datables-cssjs/dataTables.dataTables.css">
+
     <script src="<?= base_url()?>/js/bootstrap.bundle.min.js"></script>
-    
+    <script src="<?= base_url()?>/datables-cssjs/jquery-3.5.1.js" ></script>
 
 </head>
 <body>
@@ -38,8 +40,29 @@
             </ul>
         </footer>
     </div>
-    
+<!-- SCRIPT UNTUK FUNGSI SEARCH DAN BARIS HALAMAn PAda TABEL -->
+    <script>
+        $(document).ready(function(){
+            $('#example').DataTable();
+        });
+    </script>
 
+    <!-- Script memanggil preview-->
+    <script>
+    function previewImage(){
+        const foto = document.querySelector('#foto'); // Memilih input file dengan id "foto"
+        const img_preview = document.querySelector('.img-preview'); // Memilih elemen img dengan class "img-preview"
+        const file_foto = new FileReader(); // Membuat objek FileReader untuk membaca file
+
+        file_foto.readAsDataURL(foto.files[0]); // Membaca file gambar pertama yang dipilih
+        file_foto.onload = function(e){ // Saat file selesai dibaca
+            img_preview.src = e.target.result; // Menampilkan gambar di img-preview
+        }
+    }
+</script>
+
+
+    <script src="<?= base_url()?>/datables-cssjs/dataTables.js"></script>
     <script src="<?= base_url()?>/js/popper.min.js"></script>
 
 </body>
