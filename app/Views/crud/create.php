@@ -49,6 +49,7 @@
                     </div>
                 </div>     
             </div>
+            <!-- END INPUT FOTO -->
             <button type="submit" class="btn btn-primary">Tambah Data</button>
             </form>
         </div>

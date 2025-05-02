@@ -66,7 +66,7 @@ class Crud extends BaseController
                 'rules' => 'max_size[foto,1024]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
                 'label' => 'Foto',
                 'errors' =>[
-                    'max-size' => '{field} Tidak boleh lebih dari 1MB',
+                    'max_size' => '{field} Tidak boleh lebih dari 1MB',
                     'is_image' => '{field} File Bukan Gambar',
                     'mime_in' => '{field} File Bukan Gambar',
                 ]
@@ -142,14 +142,40 @@ class Crud extends BaseController
                     'required' => '{field} harus diisi',
                 ]
             ],
+            'foto' => [
+                'rules' => 'max_size[foto,1024]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
+                'label' => 'Foto',
+                'errors' =>[
+                    'max-size' => '{field} Tidak boleh lebih dari 1MB',
+                    'is_image' => '{field} File Bukan Gambar',
+                    'mime_in' => '{field} File Bukan Gambar',
+                ]
+            ]
         ])) {
             return redirect()->to('/crud-edit/' . $no_lama)->withInput();
         }
+
+        //EDIT FILE FOTO
+        $file_foto = $this->request->getFile('foto');
+        if ($file_foto->getError() === 4){
+            $nama_file = $this->request->getVar('foto_lama');
+        }else{
+            $nama_file = $file_foto->getRandomName();
+            $file_foto->move('img',$nama_file);
+
+            $file_foto_lama = $dataNoLama['foto'];
+
+            if($file_foto_lama != $this->_defaulting){
+                unlink('img/'.$file_foto_lama);
+            }
+        }
+
         $this->crud_model->save([
             'id_tbl_pegawai' => $id,
             'no_pegawai' => $this->request->getVar('no_pegawai'),
             'nama' => $this->request->getVar('nama'),
-            'id_departemen' => $this->request->getVar('id_departemen')
+            'id_departemen' => $this->request->getVar('id_departemen'),
+            'foto'=> $nama_file
         ]);
         session()->setFlashdata('succes','Data Berhasil Diubah');
         return redirect()->to('/crud');
@@ -157,9 +183,18 @@ class Crud extends BaseController
 
     public function delete($id)
     {
-        $this->crud_model->delete($id);
+        
+        $dataNoLama = $this->crud_model->where(['id_tbl_pegawai'=>$id])->first();
 
+        $file_foto_lama = $dataNoLama['foto'];
+
+        $this->crud_model->delete($id);
         session()->setFlashdata('success','Data Berhasil Dihapus');
+        
+        if($file_foto_lama != $this->_defaulting){
+            unlink('img/'.$file_foto_lama);
+        }
+        
         return redirect()->to('/crud');
     }
 }
