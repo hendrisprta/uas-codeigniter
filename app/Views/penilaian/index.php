@@ -13,14 +13,16 @@
             </div>
             <?php endif; ?>
             <hr>
-            <table class="table">
+            <table class="table" id="example">
                 <thead>
                     <tr>
                         <th scope="col">No Table</th>
                         <th scope="col">No Pegawai</th>
-                        <th scope="col">Penilaian</th>
+                        <th scope="col">Nama Pegawai</th>
+                        <th scope="col">Penilaian Kerja</th>
                         <th scope="col">Keterangan</th>
-                        <th scope="col">Aksi</th>
+                        <th scope="col">Tanggal Penilaian</th>
+                        <th scope="col">AKsi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,8 +31,19 @@
                     <tr>
                         <th scope="row"><?= $no++ ?></th>
                         <td><?= $value['no_pegawai'] ?></td>
-                        <td><?= $value['penilaian'] ?></td>
-                        <td><?= $value['keterangan'] ?></td>
+                        <td><?= $value['nama'] ?></td>
+                        <td>
+                            <?php if($value['penilaian_kerja'] == 1){
+                                echo '<span class="badge bg-success">Sangat Baik</span>';
+                            } else if ($value['penilaian_kerja'] == 2){
+                                echo '<span class="badge bg-info text-dark">Cukup</span>';
+                            } else {
+                                echo '<span class="badge bg-danger">Buruk</span>';
+                            }
+                            ?>
+                            <td><?= $value['keterangan'] ?></td>
+                            <td><?= $value['tgl_penilaian'] ?></td>
+                        </td>
                         <td>
                         <!--FUNGSI UBAH DAN HAPUS PENILAIAN -->
                             <a href="/penilaian-edit/<?= $value['id_tbl_penilaian'] ?>"><button type="button" class="btn btn-info">Ubah</button></a>

@@ -17,6 +17,10 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/departemen">Data Departemen</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/penilaian">Penilaian</a>
+                    </li>
                     
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

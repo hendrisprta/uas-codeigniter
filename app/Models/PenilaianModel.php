@@ -8,15 +8,13 @@ class PenilaianModel extends Model
 {
     protected $table            = 'tbl_penilaian';
     protected $primaryKey       = 'id_tbl_penilaian';
-    protected $allowedFields    = ['no_pegawai', 'penilaian', 'keterangan'];
+    protected $allowedFields    = ['no_pegawai', 'penilaian_kerja', 'keterangan','tgl_penilaian'];
 
     // Contoh fungsi untuk join dengan tabel pegawai
-    //
-    public function getPenilaian()
+    public function getDataPegawai()
     {
-        return $this->select('tbl_penilaian.*, tbl_pegawai.nama')
-                    ->join('tbl_pegawai', 'tbl_pegawai.no_pegawai = tbl_penilaian.no_pegawai')
-                    ->findAll();
-    }
-                    
+        $this->join('tbl_pegawai', 'tbl_pegawai.no_pegawai = tbl_penilaian.no_pegawai');
+        return $this->get()->getResultArray();
+    }  
+
 }

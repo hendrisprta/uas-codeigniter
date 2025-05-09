@@ -39,7 +39,7 @@
                 <label class="form-label">Foto</label>
                 
                 <div class="col-sm-12">
-                    <input type="file" class="form-control <?= $validation->hasError('foto') ? 'is-invalid' : '' ?>  " name="foto" id="foto" value="<?=old('foto') ?>" onchange="previewImage()">
+                    <input type="file" class="form-control <?= $validation->hasError('foto') ? 'is-invalid' : '' ?> " name="foto" id="foto" value="<?=old('foto') ?>" onchange="previewImage()">
                     <!-- VALIDASI -->
                     <div class="invalid-feedback">
                         <?= $validation->getError('foto') ?>

@@ -7,29 +7,34 @@
             <hr>
             <form action="/create-penilaian" method="POST">
                 <?= csrf_field() ?>
+
             <div class="mb-3">
                 <label class="form-label">No Pegawai</label>
-                <input type="text" class="form-control <?= $validation->hasError('no_pegawai') ? 'is-invalid' : '' ?>  " name="no_pegawai">
-                <!-- VALIDASI -->
-                <div class="invalid-feedback">
-                    <?= $validation->getError('no_pegawai') ?>
-                </div>
-            </div>
+                <select class="form-control" name="no_pegawai" id="pegawai">
+                    <?php foreach ($penilaian as $value) : ?>
+                        <option value="<?= $value['no_pegawai'] ?>">
+                            <?= old('no_pegawai') == $value['no_pegawai'] ? 'selected' : ''?>>
+                            <?= $value['no_pegawai']?> ===== <?= $value['nama']?>
+                        </option>
+                        <?php endforeach; ?>
+                </select>
+            </div>    
             <div class="mb-3">
-                <label class="form-label">penilaian</label>
-                <input type="text" class="form-control <?= $validation->hasError('penilaian') ? 'is-invalid' : '' ?>" name="penilaian">
-                <!-- VALIDASI -->
-                <div class="invalid-feedback">
-                    <?= $validation->getError('penilaian') ?>
-                </div>
+                <label class="form-label">Penilaian Kerja</label>
+                <select name="penilaian_kerja" class="form-control">
+                    <option selected>Pilih Penilaian</option>
+                    <option value="1">Sangat Baik</option>
+                    <option value="2">Cukup</option>
+                    <option value="3">Buruk</option>
+                </select>
             </div>
             <div class="mb-3">
                 <label class="form-label">Keterangan</label>
-                <input type="text" class="form-control <?= $validation->hasError('keterangan') ? 'is-invalid' : '' ?>" name="keterangan">
-                <!-- VALIDASI -->
-                <div class="invalid-feedback">
-                    <?= $validation->getError('keterangan') ?>
-                </div>
+                <input type="text" class="form-control" name="keterangan">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Tanggal Penilaian</label>
+                <input type="date" class="form-control" name="tgl_penilaian">
             </div>
             <button type="submit" class="btn btn-primary">Tambah Data</button>
             </form>

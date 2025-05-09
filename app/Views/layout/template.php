@@ -9,8 +9,12 @@
 
     <link rel="stylesheet" href="<?= base_url()?>/datables-cssjs/dataTables.dataTables.css">
 
-    <script src="<?= base_url()?>/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= base_url()?>/datables-cssjs/jquery-3.5.1.js" ></script>
+    
+
+    <link href="<?=base_url()?>/select2/select2.min.css" rel="stylesheet"/>
+    <script src="<?=base_url()?>/select2/jquery-3.4.1.js"></script>
+    <script src="<?=base_url()?>/select2/select2.min.js"></script>
+    
 
 </head>
 <body>
@@ -47,11 +51,31 @@
         });
     </script>
 
-    <!-- Script memanggil preview-->
+    <!-- SCRIPT SELECT 2-->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#pegawai').select2();
+        })
+    </script>
 
+    <!-- SCRIPT FOTO -->
+     <script>
+        function previewImage(){
+            const foto = document.querySelector('#foto')
+            const img_preview = document.querySelector('.img-preview')
+            const file_foto = new FileReader()
+            file_foto.readAsDataURL(foto.files[0])
+            file_foto.onload = function(e){
+                img_preview.src = e.target.result
+            }
+        }
+     </script>
 
+    <script src="<?= base_url()?>/js/bootstrap.bundle.min.js"></script>   
     <script src="<?= base_url()?>/datables-cssjs/dataTables.js"></script>
     <script src="<?= base_url()?>/js/popper.min.js"></script>
+
+    
 
 </body>
 </html>
