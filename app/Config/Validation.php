@@ -6,6 +6,8 @@ use CodeIgniter\Validation\CreditCardRules;
 use CodeIgniter\Validation\FileRules;
 use CodeIgniter\Validation\FormatRules;
 use CodeIgniter\Validation\Rules;
+//Myth Auth untuk login
+use \Myth\Auth\Authentication\Passwords\ValidationRules;
 
 class Validation
 {
@@ -24,6 +26,8 @@ class Validation
         FormatRules::class,
         FileRules::class,
         CreditCardRules::class,
+        //RULES UNTUK LOGIN
+        ValidationRules::class,
     ];
 
     /**

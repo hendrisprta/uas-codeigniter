@@ -47,7 +47,9 @@
                         <td>
                         <!--FUNGSI UBAH DAN HAPUS PENILAIAN -->
                             <a href="/penilaian-edit/<?= $value['id_tbl_penilaian'] ?>"><button type="button" class="btn btn-info">Ubah</button></a>
+                            <?php if (has_permission("data-pegawai")):?>
                             <a href="/penilaian-hapus/<?= $value['id_tbl_penilaian'] ?>"><button type="button" class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin Menghapus Data Ini?')">Hapus</button></a>
+                            <?php endif;?>
                         </td>
                     </tr>
                     <?php endforeach ?>
