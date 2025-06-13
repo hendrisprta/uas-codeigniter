@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # CodeIgniter 4 Framework
 
 ## What is CodeIgniter?
@@ -55,7 +54,3 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - [mbstring](http://php.net/manual/en/mbstring.installation.php)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
 - xml (enabled by default - don't turn it off)
-=======
-# uas-codeigniter
-Halo Aku A AI VE O TIGA
->>>>>>> c1ba03acb20950bc50af9539f7dae662739e82b4

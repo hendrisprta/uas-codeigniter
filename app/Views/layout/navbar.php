@@ -1,55 +1,83 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">HENDRI_CRUD</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Data Alumni POLIMAT/</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
 
-                    <?php if (has_permission("data-pegawai")):?>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/crud">Data Pegawai</a>
-                    </li>
-                    <?php endif;?>
+    <link rel="stylesheet" href="<?= base_url()?>/css/bootstrap.min.css">
 
-                    <?php if (has_permission("data-pegawai")):?>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/departemen">Data Departemen</a>
-                    </li>
-                    <?php endif;?>
+    <link rel="stylesheet" href="<?= base_url()?>/datables-cssjs/dataTables.dataTables.css">
 
-                    <?php if (has_permission("data-penilaian")):?>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/penilaian">Penilaian</a>
-                    </li>
-                    <?php endif;?>
+      <!-- Favicons -->
+  <link href="<?= base_url()?>/assets/img/favicon.png" rel="icon">
+  <link href="<?= base_url()?>/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-                    <?php if (has_permission("data-pegawai")):?>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/users">Data User</a>
-                    </li>
-                    <?php endif;?>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <?= user()->username?>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/profil">Profil</a></li>
-                            <li><a class="dropdown-item" href="/password">Ubah password</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
+  <!-- Vendor CSS Files -->
+  <link href="<?= base_url()?>/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?= base_url()?>/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="<?= base_url()?>/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="<?= base_url()?>/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="<?= base_url()?>/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="<?= base_url()?>/assets/css/main.css" rel="stylesheet">
+
+  <!--SELECT 2-->
+    <link href="<?=base_url()?>/select2/select2.min.css" rel="stylesheet"/>
+    <script src="<?=base_url()?>/select2/jquery-3.4.1.js"></script>
+    <script src="<?=base_url()?>/select2/select2.min.js"></script>
+    
+
+</head>
+
+<header id="header" class="header d-flex align-items-center sticky-top">
+  <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+    <a href="/" class="logo d-flex align-items-center me-auto">
+      <h1 class="sitename">Sistem Alumni <br> PoLT3K😎</h1>
+    </a>
+
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li><a href="/">Beranda</a></li>
+
+        <?php if (has_permission("data-pegawai")):?>
+          <li><a href="/crud">Data Alumni</a></li>
+          <li><a href="/departemen">Program Studi</a></li>
+          <li><a href="/users">Manajemen Akun</a></li>
+        <?php endif;?>
+
+        <?php if (has_permission("data-penilaian")):?>
+          <li><a href="/penilaian">Tracer Study</a></li>
+        <?php endif;?>
+
+        <li><a href="<?= base_url()?>#contact">Kontak</a></li>
+
+        <?php if (logged_in()) : ?>
+        <li class="dropdown">
+          <a href="#"><span><?= user()->username ?></span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <ul>
+            <li><a href="/profil">Profil</a></li>
+            <li><a href="/password">Ubah Password</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </li>
+        <?php else : ?>
+        <li><a class="btn-getstarted scrollto" href="/login">Masuk</a></li>
+        <?php endif; ?>
+      </ul>
+      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
     </nav>
+
+  </div>
+</header>
+

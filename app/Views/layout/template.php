@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>latihan CRUD</title>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Data Alumni POLIMAT/</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
 
     <link rel="stylesheet" href="<?= base_url()?>/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="<?= base_url()?>/datables-cssjs/dataTables.dataTables.css">
 
-    
+      <!-- Favicons -->
+  <link href="<?= base_url()?>/assets/img/favicon.png" rel="icon">
+  <link href="<?= base_url()?>/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="<?= base_url()?>/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?= base_url()?>/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="<?= base_url()?>/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="<?= base_url()?>/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="<?= base_url()?>/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="<?= base_url()?>/assets/css/main.css" rel="stylesheet">
+
+  <!--SELECT 2-->
     <link href="<?=base_url()?>/select2/select2.min.css" rel="stylesheet"/>
     <script src="<?=base_url()?>/select2/jquery-3.4.1.js"></script>
     <script src="<?=base_url()?>/select2/select2.min.js"></script>
@@ -24,26 +44,16 @@
         <?= $this->renderSection('content')?>
 
 
-    <div class="container">
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-            <p class="col-md-4 mb-0 text-muted">&copy; 2025 Company, Inc</p>
-    
-            <a href="/"
-                class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                <svg class="bi me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap" />
-                </svg>
-            </a>
-    
-            <ul class="nav col-md-4 justify-content-end">
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-            </ul>
-        </footer>
+ <footer id="footer" class="footer">
+
+
+    <div class="container copyright text-center mt-4">
+      <p>©2025 <span>Copyright</span> <strong class="px-1 sitename">AlUmNi PoLT3K</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+      </div>
     </div>
+
+  </footer>
 <!-- SCRIPT UNTUK FUNGSI SEARCH DAN BARIS HALAMAn PAda TABEL -->
     <script>
         $(document).ready(function(){
